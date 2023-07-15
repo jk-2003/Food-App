@@ -1,0 +1,41 @@
+.list-container {
+  background-color: #ffffff;
+  margin: 10rem auto;
+  margin-bottom: 2rem;
+  width: 70%;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+.meals {
+  /* color: rgb(87, 35, 35); */
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid black;
+  padding: 0.5rem;
+}
+.meals .items {
+  
+  text-align: left;
+}
+.meals .items h3{
+    font-size: 20px;
+    line-height: 5px;
+}
+.meals .items p{
+     font-style: italic;
+     font-size: 15px;
+     line-height: 8px;
+}
+.meals .items div{
+    font-size: 22px;
+    line-height: 15px;
+    color: brown;
+}
+.meals .item-required {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+

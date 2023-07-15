@@ -1,0 +1,25 @@
+.item-required .amount {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.amount .price {
+  border: 1px solid #000;
+  padding: 2px 5px;
+  border-radius: 0.5rem;
+  max-width: 2rem;
+}
+.item-required .meal-btn {
+  border: none;
+  background-color: #4d1601;
+  border-radius: 0.5rem;
+  color: #ffffff;
+  padding: 5px 1rem;
+  margin-top: 0.5rem;
+  font-size: 15px;
+
+  cursor: pointer;
+}
+.item-required .meal-btn:hover {
+  background-color: #2c0d00;
+}
