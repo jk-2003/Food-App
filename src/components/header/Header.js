@@ -1,14 +1,11 @@
 import React, { useContext } from "react";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import "./Header.css";
-import CartContext from "../contex/CartContex";
+import { useSelector } from "react-redux";
+
 export default function Header(props) {
-  const cartCtx = useContext(CartContext);
-  // console.log(cartCtx)
-  const numberOfCartItems = cartCtx.items.reduce((curNumber, item) => {
-    return curNumber + item.amount;
-  }, 0);
-  // const numberOfCartItems = 0;
+const totalQuantity=useSelector(state=>state.cart.totalquantity)
+
   return (
     <div className="header">
       <div className="navbar">
@@ -18,7 +15,7 @@ export default function Header(props) {
             <AddShoppingCartIcon />
           </span>
           <span className="content">AddCart</span>
-          <span className="bage">{numberOfCartItems}</span>
+          <span className="bage">{totalQuantity}</span>
         </button>
       </div>
     </div>

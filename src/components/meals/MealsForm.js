@@ -9,8 +9,8 @@ function MealsForm(props) {
   }
   function submitCarthandeler(e) {
     e.preventDefault();
-    props.addamount(amount);
-    setamount("");
+    props.addamount(Number(amount));
+    setamount(0);
   }
 
   return (

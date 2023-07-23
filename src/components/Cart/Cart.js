@@ -4,19 +4,29 @@ import "./Cart.css";
 import CartContext from "../contex/CartContex";
 import Cartitemlist from "./cartitemlist";
 import CartForm from "./CartForm";
+import { addtocart,removefromcart,clearcart } from "../Store/Cartslice";
+import { useSelector, useDispatch } from "react-redux";
+
 const Cart = (props) => {
   const [cartform, setcartform] = useState(false);
   const [cartbtn, setcartbtn] = useState(true);
   const [submitting, setsubmitting] = useState(false);
   const [submitted, setsubmitted] = useState(false);
 
-  const cxt = useContext(CartContext);
-  const totalAmount = `$${cxt.totalAmount.toFixed(2)}`;
+  const dispatch = useDispatch();
+  const cartitems = useSelector((state) => state.cart.items);
+  const totalAmount = useSelector((state) => state.cart.totalprice);
+  console.log(cartitems);
+
+  // const cxt = useContext(CartContext);
+
   const onadd = (i) => {
-    cxt.addItem({ ...i, amount: 1 });
+dispatch(addtocart({...i,quantity:1}))
+    console.log(i);
   };
   const onremove = (id) => {
-    cxt.removeItem(id);
+    dispatch(removefromcart(id))
+    console.log(id)
   };
 
   function CartFormHandler() {
@@ -38,33 +48,34 @@ const Cart = (props) => {
         method: "POST",
         body: JSON.stringify({
           user: i,
-          order: cxt.items,
+          order: cartitems,
         }),
       }
     );
     setsubmitting(false);
     setsubmitted(true);
-    cxt.clearItem();
+    dispatch(clearcart())
   }
 
   const cartbutton = (
     <div className={"actions"}>
-      <button onClick={closeform} className={"button--alt"}>
+      {<button onClick={closeform} className={"button--alt"}>
         Close
-      </button>
+      </button>}
       <button onClick={CartFormHandler} className={"button"}>
         Order
       </button>
     </div>
   );
-  const cart = cxt.items.map((i) => {
+  const cart = cartitems.map((i) => {
     {
       return (
         <Cartitemlist
+        key={i.id}
           name={i.name}
           id={i.id}
           price={i.price}
-          amount={i.amount}
+          amount={i.quantity}
           onadd={onadd.bind(null, i)}
           onremove={onremove.bind(null, i.id)}
         />
@@ -81,14 +92,15 @@ const Cart = (props) => {
       </div>
       <div className={"total"}>
         <span>Total Amount</span>
-        <span>{totalAmount}</span>
+        <span>$ {totalAmount}</span>
       </div>
       {!cartform && cartbutton}
     </React.Fragment>
   );
-  const submittingcontent = <p>sending order data......</p>;
+
+  const submittingcontent = <p className="pending">sending order data......</p>;
   const submittedcontent = (
-    <div>
+    <div className="success">
       <p>order submitted successfully. </p>
       <div className="actions">
         <button onClick={closeform} className={"button--alt"}>
@@ -97,6 +109,7 @@ const Cart = (props) => {
       </div>
     </div>
   );
+
   return (
     <ReactModal
       className={"modal"}

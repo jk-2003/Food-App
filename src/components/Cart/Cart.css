@@ -78,7 +78,7 @@
   color: #363636;
   line-height: 25px;
 }
-.cart-item p{
+.cart-item p {
   line-height: 5px;
 }
 .summary {
@@ -130,4 +130,16 @@
 .cart-item button:active {
   background-color: #8a2b06;
   color: white;
+}
+.pending {
+  background-color: #f1fd0a;
+  color: #000000;
+  padding: 1rem;
+  font-size: 25px;
+}
+.success p {
+  background-color: #14ed1e;
+  color: rgb(0, 0, 0);
+  padding: 1rem;
+  font-size: 25px;
 }
